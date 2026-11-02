@@ -1,0 +1,8 @@
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Safe local development examples"
+paths = [
+  '''\.env\.example''',
+]

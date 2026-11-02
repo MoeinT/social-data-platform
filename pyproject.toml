@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "social-data-platform"
+version = "0.1.0"
+description = "A locally executable social image ingestion and analysis prototype"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "alembic>=1.13,<2",
+    "pydantic-settings>=2.6,<2.10",
+    "psycopg2-binary>=2.9,<3",
+    "SQLAlchemy>=1.4.54,<2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "mypy>=1.13,<2",
+    "pre-commit>=4,<5",
+    "pytest>=8.3,<9",
+    "pytest-cov>=6,<7",
+    "ruff>=0.8,<1",
+]
+
+[project.scripts]
+crawltech = "crawltech.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests", "dags"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.mypy]
+python_version = "3.11"
+mypy_path = "src"
+packages = ["crawltech"]
+strict = true
+plugins = ["pydantic.mypy"]
+exclude = ["^migrations/"]
+
+[[tool.mypy.overrides]]
+module = ["alembic.*", "psycopg.*", "sqlalchemy.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["crawltech.models.tables"]
+disable_error_code = ["valid-type", "misc"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+markers = [
+    "integration: requires a local PostgreSQL database",
+    "dag: validates Airflow DAG structure",
+]

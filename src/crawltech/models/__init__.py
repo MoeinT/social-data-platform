@@ -1,0 +1,41 @@
+"""Operational persistence models."""
+
+from crawltech.models.tables import (
+    AnalysisResult,
+    AssignmentSource,
+    Author,
+    AuthorSegmentAssignment,
+    Base,
+    BoundingBox,
+    CrawlBatch,
+    CrawlRun,
+    DataQualityResult,
+    DetectedAttribute,
+    Image,
+    Post,
+    PostSegmentAssignment,
+    Segment,
+    SocialNetwork,
+    TrendMetric,
+    post_images,
+)
+
+__all__ = [
+    "AnalysisResult",
+    "AssignmentSource",
+    "Author",
+    "AuthorSegmentAssignment",
+    "Base",
+    "BoundingBox",
+    "CrawlBatch",
+    "CrawlRun",
+    "DataQualityResult",
+    "DetectedAttribute",
+    "Image",
+    "Post",
+    "PostSegmentAssignment",
+    "Segment",
+    "SocialNetwork",
+    "TrendMetric",
+    "post_images",
+]

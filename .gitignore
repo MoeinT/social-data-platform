@@ -152,6 +152,7 @@ activemq-data/
 # Environments
 .env
 .envrc
+.env.*.local
 .venv
 env/
 venv/
@@ -195,6 +196,14 @@ cython_debug/
 #   Ignore directories containing user credentials, local state, and settings.
 #   Learn more at https://abstra.io/docs
 .abstra/
+
+# Project data and local services
+/data/
+/logs/
+/airflow-logs/
+/postgres-data/
+/airflow-postgres-data/
+*.sqlite3
 
 # Visual Studio Code
 #   Visual Studio Code specific template is maintained in a separate VisualStudioCode.gitignore that
