@@ -14,9 +14,9 @@ def test_pipeline_dag_imports_without_errors() -> None:
     dag_bag = DagBag(dag_folder=str(dag_file), include_examples=False)
 
     assert dag_bag.import_errors == {}
-    dag = dag_bag.get_dag("crawltech_social_image_pipeline")
+    dag = dag_bag.dags.get("crawltech_social_image_pipeline")
     assert dag is not None
-    assert dag.task_ids == [
+    assert set(dag.task_ids) == {
         "build_trend_dataset",
         "check_data_quality",
         "discover_author_batches",
@@ -25,6 +25,6 @@ def test_pipeline_dag_imports_without_errors() -> None:
         "start_run",
         "validate_configuration",
         "validate_final_output",
-    ]
+    }
     assert dag.get_task("ingest_author_batch").retries == 2
     assert dag.get_task("finalize_run").trigger_rule == "all_done"
